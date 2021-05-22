@@ -1,6 +1,6 @@
 package dspblocks
 
-import breeze.stats.distributions.Uniform
+import breeze.stats.distributions.Rand
 import chisel3.iotesters.PeekPokeTester
 import chisel3.{Bundle, Flipped, Module}
 import freechips.rocketchip.amba.axi4._
@@ -15,7 +15,7 @@ class DspRegisterTestModule(
                   val outP: AXI4StreamSlaveParameters,
                   val len: Int,
                   val transactions: Seq[AXI4StreamTransaction] =
-                    AXI4StreamTransaction.defaultSeq(100).map(_.randData(Uniform(0.0, 65535.0)))
+                    AXI4StreamTransaction.defaultSeq(100).map(_.randData(Rand.uniform.map(d => (d * 65535).toInt)))
                 ) extends Module {
   implicit val p: Parameters = Parameters.empty
 
