@@ -29,7 +29,7 @@ trait RegmapExample extends HasRegMap {
 class TLRegmapExample extends TLRegisterRouter(0, "example", Seq("dsptools", "example"), beatBytes = 8, interrupts = 1)(
   new TLRegBundle(null, _))(
     new TLRegModule(null, _, _) with RegmapExample)(Parameters.empty) {
-  def standaloneParams = TLBundleParameters(addressBits = 64, dataBits = 64, sourceBits = 1, sinkBits = 1, sizeBits = 6, aUserBits = 0, dUserBits = 0, hasBCE = false)
+  def standaloneParams = TLBundleParameters(addressBits = 64, dataBits = 64, sourceBits = 1, sinkBits = 1, sizeBits = 6, echoFields = Nil, requestFields = Nil, responseFields = Nil, hasBCE = false)
 
   val ioMemNode = BundleBridgeSource(() => TLBundle(standaloneParams))
   node :=
@@ -53,7 +53,7 @@ class TLRegmapExample extends TLRegisterRouter(0, "example", Seq("dsptools", "ex
 class AXI4RegmapExample extends AXI4RegisterRouter(0, beatBytes = 8, interrupts = 1)(
   new AXI4RegBundle(null, _))(
     new AXI4RegModule(null, _, _) with RegmapExample)(Parameters.empty) {
-  def standaloneParams = AXI4BundleParameters(addrBits = 64, dataBits = 64, idBits = 1, userBits = 0, wcorrupt = false)
+  def standaloneParams = AXI4BundleParameters(addrBits = 64, dataBits = 64, idBits = 1, echoFields = Nil, requestFields = Nil, responseFields = Nil)
 
   val ioMemNode = BundleBridgeSource(() => AXI4Bundle(standaloneParams))
   node :=

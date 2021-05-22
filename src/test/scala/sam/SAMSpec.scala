@@ -13,7 +13,6 @@ import breeze.signal.support.CanFilter._
 import chisel3._
 import chisel3.iotesters._
 import firrtl_interpreter.InterpreterOptions
-import org.scalatest.{FlatSpec, Matchers}
 import scala.util.Random
 import scala.math._
 import org.scalatest.Tag

@@ -124,8 +124,9 @@ MuxInOuts[TLClientPortParameters, TLManagerPortParameters, TLEdgeOut, TLEdgeIn, 
       sourceBits = 1,
       sinkBits = 1,
       sizeBits = 1,
-      aUserBits = 0,
-      dUserBits = 0,
+      echoFields = Nil,
+      requestFields = Nil,
+      responseFields = Nil,
       hasBCE = false
     )))
 
