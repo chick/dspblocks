@@ -2,6 +2,7 @@
 import mill._
 import mill.define.Sources
 import mill.modules.Util
+import mill.scalalib.TestModule.ScalaTest
 import scalalib._
 // support BSP
 import mill.bsp._
@@ -14,6 +15,7 @@ import $file.`rocket-chip`.common
 val sv = "2.12.13"
 val chisel3Ivy = ivy"edu.berkeley.cs::chisel3:3.4.3"
 val chisel3PluginIvy = ivy"edu.berkeley.cs:::chisel3-plugin:3.4.3"
+val iotestersIvy = ivy"edu.berkeley.cs::chisel-iotesters:1.5.3"
 val macroParadiseIvy = ivy"org.scalamacros:::paradise:2.1.1"
 val dsptoolsIvy = ivy"edu.berkeley.cs::dsptools:1.4.3"
 
@@ -43,10 +45,14 @@ object myrocketchip extends `rocket-chip`.common.CommonRocketChip {
   def configModule: PublishModule = myconfig
 }
 
-object dspblocks extends SbtModule {
+object dspblocks extends SbtModule { m =>
   override def millSourcePath = os.pwd
   override def scalaVersion = sv
   override def scalacOptions = Seq("-Xsource:2.11")
   override def moduleDeps = super.moduleDeps ++ Seq(myrocketchip)
   override def ivyDeps = Agg(dsptoolsIvy)
+  object test extends ScalaTest {
+    override def scalacPluginClasspath = m.scalacPluginClasspath
+    override def ivyDeps = m.ivyDeps() ++ Agg(iotestersIvy)
+  }
 }
