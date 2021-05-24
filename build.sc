@@ -51,7 +51,7 @@ object dspblocks extends SbtModule { m =>
   override def scalacOptions = Seq("-Xsource:2.11")
   override def moduleDeps = super.moduleDeps ++ Seq(myrocketchip)
   override def ivyDeps = Agg(dsptoolsIvy)
-  object test extends ScalaTest {
+  object test extends Tests with ScalaTest {
     override def ivyDeps = m.ivyDeps() ++ Agg(iotestersIvy)
   }
 }
